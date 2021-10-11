@@ -1,0 +1,17 @@
+{
+  "name": "rsync-progress-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Scot Hampel <scot@scothampel.com> (https://scothampel.com)",
+  "license": "MIT"
+}
