@@ -9,7 +9,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 const {
   PORT = 3001,
   TRANSFER_DIR = path.join(__dirname, 'transfers'),
-  COMPLETE_DIR = path.join(__dirname, 'transfers/complete')
+  COMPLETE_DIR = path.join(__dirname, 'complete')
 } = process.env
 
 // Express
@@ -59,9 +59,24 @@ app.get('/transfers', (req, res) => {
   }
 
   // Complete transfers
+  let complete_transfers = {}
+  try {
+    // Read completed dir
+    const files = fs.readdirSync(COMPLETE_DIR)
+    files.forEach(file => {
+      // Read each file in dir
+      const file_path = path.join(COMPLETE_DIR, file)
+      const data = fs.readFileSync(file_path, 'utf-8').split(/\n/)
+      // Add final numbers to completed transfers array
+      complete_transfers[file] = data[data.length - 3]
+    })
+  }
+  catch (err) {
+    console.error(err)
+    res.status(500).json(err)
+  }
 
-
-  res.json(current_transfers)
+  res.json({current_transfers, complete_transfers})
 })
 // DELETE transfer
 app.delete('/transfer/:name', (req, res) => {
