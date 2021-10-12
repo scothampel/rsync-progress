@@ -79,8 +79,34 @@ app.get('/transfers', (req, res) => {
   res.json({current_transfers, complete_transfers})
 })
 // DELETE transfer
-app.delete('/transfer/:name', (req, res) => {
+app.delete('/transfer', (req, res) => {
+  // Pull filename from body
+  const { name } = req.body
 
+  // Read complete dir to ensure file exists
+  // Prevents relative path deletion
+  fs.readdir(COMPLETE_DIR, (err, files) => {
+    if (err) {
+      console.error(err)
+      res.status(500).json(err)
+    }
+    // File exists
+    else if (files.includes(name)) {
+      // Delete file
+      fs.unlink(path.join(COMPLETE_DIR, name), err => {
+        if (err) {
+          console.error(err)
+          res.status(500).json(err)
+        }
+        // File deleted
+        else res.sendStatus(200)
+      })
+    }
+    // File not found
+    else res.sendStatus(400)
+  })
+
+  
 })
 
 // GET wildcard, return static index.html
