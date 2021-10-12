@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 // Routes
 
 // GET transfers
+// TODO Broken pipe handling
 app.get('/transfers', (req, res) => {
   // Current transfers
   let current_transfers = {}
