@@ -78,6 +78,7 @@ app.get('/transfers', (req, res) => {
 
   res.json({current_transfers, complete_transfers})
 })
+
 // DELETE transfer
 app.delete('/transfer', (req, res) => {
   // Pull filename from body
