@@ -20,7 +20,7 @@ function App() {
       {
         !loading &&
         Object.entries(transfers.current_transfers).map((v, i) => {
-          return <Transfer key={i} name={v[0]} files={v[1].file_list} progress={v[1].file_prog} complete={false} />
+          return <Transfer key={i} id={i} name={v[0]} files={v[1].file_list} progress={v[1].file_prog} complete={false} />
         })
       }
     </div>
