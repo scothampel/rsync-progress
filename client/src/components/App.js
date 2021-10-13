@@ -3,7 +3,7 @@ import Transfer from './Transfer';
 
 function App() {
   return (
-    <div className='container'>
+    <div className='container mt-3'>
       <Transfer name='Test Movie something long.wfwf.fgwfwwadawdwadwadadwdwadawddawdwada' progress='20' />
     </div>
   )
