@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+const cors = require('cors')
 
 // ENV config
 require('dotenv').config({ path: path.join(__dirname, '.env') });
@@ -16,6 +17,7 @@ const {
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors())
 // Static front-end
 app.use(express.static(path.join(__dirname, '../client/build')))
 
