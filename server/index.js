@@ -9,8 +9,8 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 // Environment vars and defaults
 const {
   PORT = 3001,
-  TRANSFER_DIR = path.join(__dirname, 'transfers'),
-  COMPLETE_DIR = path.join(__dirname, 'complete')
+  TRANSFER_DIR = path.join(__dirname, 'transfers', 'current'),
+  COMPLETE_DIR = path.join(__dirname, 'transfers', 'complete')
 } = process.env
 
 // Express
