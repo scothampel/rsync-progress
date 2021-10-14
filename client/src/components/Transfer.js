@@ -10,10 +10,16 @@ export default function Transfer({ name, files, progress, complete, id }) {
     !complete && setCurrentProgress(progress[progress.length - 1].match(/\S+/g))
   }, [files, progress, complete])
 
-  const handleClick = e => {
-    e.preventDefault()
-
-    alert('Delete transfer')
+  const handleClick = name => {
+    fetch('/transfer', {
+      method: 'DELETE',
+      body: JSON.stringify({ name }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.text())
+    .then(data => alert(data))
   }
 
   return (
@@ -22,10 +28,10 @@ export default function Transfer({ name, files, progress, complete, id }) {
         <div className='card-body position-relative pt-2'>
           <div className='d-flex justify-content-between align-items-center'>
             <h5 className='card-title pb-1 overflow-ellipsis m-0'>{name}</h5>
-            {complete ? <i class="bi bi-x-lg fs-4"></i> : <i class="bi bi-chevron-down fs-4"></i>}
+            {complete ? <i className="bi bi-x-lg fs-4"></i> : <i className="bi bi-chevron-down fs-4"></i>}
           </div>
           {!complete && <button className='btn p-0 fs-3 w-100 h-100 position-absolute top-0 end-0' type='button' data-bs-toggle='collapse' data-bs-target={`#files-${id}`}></button>}
-          {complete && <button className='btn p-0 fs-3 w-100 h-100 position-absolute top-0 end-0' type='button' onClick={handleClick} ></button>}
+          {complete && <button className='btn p-0 fs-3 w-100 h-100 position-absolute top-0 end-0' type='button' onClick={() => handleClick(name)} ></button>}
           {
             !complete &&
             <div className='d-flex justify-content-between'>
@@ -46,9 +52,9 @@ export default function Transfer({ name, files, progress, complete, id }) {
                 {
                   files.map((v, i) => {
                     return (
-                      <li className='list-group-item d-flex justify-content-between'>
+                      <li key={i} className='list-group-item d-flex justify-content-between'>
                         <p className='overflow-ellipsis w-75 m-0'>{v.match(/(?<=\/).+/)}</p>
-                        {i !== files.length - 1 && <i class="bi bi-check float-end"></i>}
+                        {i !== files.length - 1 && <i className="bi bi-check float-end"></i>}
                       </li>
                     )
                   })

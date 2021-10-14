@@ -26,7 +26,7 @@ function App() {
       {
         !loading &&
         Object.entries(transfers.complete_transfers).map((v, i) => {
-          return <Transfer name={v[0]} files={v[1].file_list} progress={v[1].file_prog} complete={true} />
+          return <Transfer key={i} name={v[0]} files={v[1].file_list} progress={v[1].file_prog} complete={true} />
         })
       }
     </div>
