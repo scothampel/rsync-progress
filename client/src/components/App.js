@@ -7,12 +7,18 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/transfers')
+    const getTransfers = () => {
+      fetch('/transfers')
       .then(res => res.json())
       .then(data => {
         setTransfers(data)
         setLoading(false)
       })
+    }
+    // TODO Maybe use websocket in the future
+    getTransfers()
+    // Interval of 3 sec for checking transfers
+    setInterval(getTransfers, 3000);
   }, [])
 
   return (

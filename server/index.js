@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 
 // GET transfers
 // TODO Broken pipe handling
+// TODO Maybe use websocket in the future for updates
 app.get('/transfers', (req, res) => {
   // Current transfers
   let current_transfers = {}
