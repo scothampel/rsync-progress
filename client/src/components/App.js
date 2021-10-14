@@ -3,7 +3,7 @@ import '../styles/App.css';
 import Transfer from './Transfer';
 
 function App() {
-  const [transfers, setTransfers] = useState({ current_transfers: {} })
+  const [transfers, setTransfers] = useState({ current_transfers: {}, complete_transfers: {} })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
